@@ -39,14 +39,14 @@ class Player(object):
 HomePlayer = [Player(1, 'D. Warner', 77, "Open", 26.74, 140.10, 20,  "LB", 99, 99),
               Player(2, "A. Finch", 84, "Open", 37.13, 155.87, 52,  "LAO", 99, 99),
               Player(3, "D. Short", 73, "Open", 32.88, 120.81, 50, "SLAC", 50.33, 38.00),
-              Player(4, "G. MAxwell", 82, "Middle", 34.40, 158.20, 70,  "OB", 27.07, 21.60),
+              Player(4, "G. Maxwell", 82, "Middle", 34.40, 158.20, 70,  "OB", 27.07, 21.60),
               Player(5, "P. Handscomb", 70, "Middle", 33.00, 100, 20, "None", 99, 99),
               Player(6, "M. Stoinis", 60, "Middle", 15.11, 116.23, 66, "Med", 35.44, 25.5),
               Player(7, "N. Coulter-Nile", 60, "Lower", 13.63, 125.00, 78, "RF", 23.58, 17.1),
               Player(8, "P. Cummins", 45, "Lower", 5.00, 94.59, 81, "RF", 21.24, 18.2),
               Player(9, "J. Richardson", 55, "Lower", 13.00, 216.66, 72, "RF", 31.88, 22.6),
-              Player(10, "J. Behrendorff", 30,"Lower", 0, 0, "LFM", 83, 16.71, 13.7),
-              Player(11, "A. Zampa", 30, "Lower", 11.50, 88.46, "LB", 79, 19.43, 19.3)]
+              Player(10, "J. Behrendorff", 30,"Lower", 0, 0, 83, "LFM", 16.71, 13.7),
+              Player(11, "A. Zampa", 30, "Lower", 11.50, 88.46, 79, "LB", 19.43, 19.3)]
 
 
 
@@ -63,49 +63,53 @@ AwayPlayer = [Player(101, 'J. Roy', 75, "Middle", 23.32, 145.11, 20, "None", 99,
               Player(111, "A. Rashid", 20, "Lower", 7.83, 85.45, 78, "LB", 23.97, 19.60)]
 
 class Batsman(object):
-    def __init__(self, batID, batruns, batballs, batSR, isstriker, isnonstriker, isout, hasbatted):
+    def __init__(self, batID, batrating, batruns, batballs, batSR, howout, isstriker, isnonstriker, isout, hasbatted):
         self.batID = batID
+        self.batrating = batrating
         self.batruns = batruns
         self.batballs = batballs
         self.batSR = batSR
+        self.howout = howout
         self.isstriker = isstriker
         self.isnonstriker = isnonstriker
         self.isout = isout
         self.hasbatted = hasbatted
-        self.list = [batID, batruns, batballs, batSR, isstriker, isnonstriker, isout, hasbatted] #new list item
+        self.list = [batID, batrating, batruns, batballs, batSR, howout, isstriker, isnonstriker, isout, hasbatted] #new list item
     def __getitem__(self,index): #magic that I don't understand, but it works.
         return self.list[index]
     def __iter__(self):
-        for elem in self, batID, batruns, batballs, batSR, isstriker, isnonstriker, isout, hasbatted:
+        for elem in self, batID, batrating, batruns, batballs, batSR, howout, isstriker, isnonstriker, isout, hasbatted:
             yield elem
             
 
-BatterList = [Batsman(1, 0, 0, 0, False, False, False, False), Batsman(2, 0, 0, 0, False, False, False, False), Batsman(3, 0, 0, 0, False, False, False, False),
-              Batsman(4, 0, 0, 0, False, False, False, False), Batsman(5, 0, 0, 0, False, False, False, False), Batsman(6, 0, 0, 0, False, False, False, False),
-              Batsman(7, 0, 0, 0, False, False, False, False), Batsman(8, 0, 0, 0, False, False, False, False), Batsman(9, 0, 0, 0, False, False, False, False),
-              Batsman(10, 0, 0, 0, False, False, False, False), Batsman(11, 0, 0, 0, False, False, False, False)]
+BatterList = [Batsman(1, 0, 0, 0, 0, 0, False, False, False, False), Batsman(2, 0, 0, 0, 0, 0, False, False, False, False), Batsman(3, 0, 0, 0, 0, 0, False, False, False, False),
+              Batsman(4, 0, 0, 0, 0, 0, False, False, False, False), Batsman(5, 0, 0, 0, 0, 0, False, False, False, False), Batsman(6, 0, 0, 0, 0, 0, False, False, False, False),
+              Batsman(7, 0, 0, 0, 0, 0, False, False, False, False), Batsman(8, 0, 0, 0, 0, 0, False, False, False, False), Batsman(9, 0, 0, 0, 0, 0, False, False, False, False),
+              Batsman(10, 0, 0, 0, 0, 0, False, False, False, False), Batsman(11, 0, 0, 0, 0, 0, False, False, False, False)]
 
 class Bowler(object):
-    def __init__(self, bowlID, bowlballs, bowlruns, bowlwickets, isbowler, lastbowler, maxed):
+    def __init__(self, bowlID, bowlrating, bowlballs, bowlmaiden, bowlruns, bowlwickets, isbowler, lastbowler, maxed):
         self.bowlID = bowlID
+        self.bowlrating = bowlrating
         self.bowlballs = bowlballs
+        self.bowlmaiden = bowlmaiden
         self.bowlruns = bowlruns
         self.bowlwickets = bowlwickets
         self.isbowler = isbowler
         self.lastbowler = lastbowler
         self.maxed = maxed
-        self.list = [bowlID, bowlballs, bowlruns, bowlwickets, isbowler, lastbowler, maxed] #new list item
+        self.list = [bowlID, bowlrating, bowlballs, bowlmaiden, bowlruns, bowlwickets, isbowler, lastbowler, maxed] #new list item
     def __getitem__(self,index): #magic that I don't understand, but it works.
         return self.list[index]
     def __iter__(self):
-        for elem in self, bowlID, bowlballs, bowlruns, bowlwickets, isbowler, lastbowler, maxed:
+        for elem in self, bowlID, bowlrating, bowlballs, bowlmaiden, bowlruns, bowlwickets, isbowler, lastbowler, maxed:
             yield elem
             
 
-BowlerList = [Bowler(1, 0, 0, 0, False, False, False), Bowler(2, 0, 0, 0, False, False, False), Bowler(3, 0, 0, 0, False, False, False),
-              Bowler(4, 0, 0, 0, False, False, False), Bowler(5, 0, 0, 0, False, False, False), Bowler(6, 0, 0, 0, False, False, False),
-              Bowler(7, 0, 0, 0, False, False, False), Bowler(8, 0, 0, 0, False, False, False), Bowler(9, 0, 0, 0, False, False, False),
-              Bowler(10, 0, 0, 0, False, False, False), Bowler(11, 0, 0, 0, False, False, False)]
+BowlerList = [Bowler(1, 0, 0, 0, 0, 0, False, False, False), Bowler(2, 0, 0, 0, 0, 0, False, False, False), Bowler(3, 0, 0, 0, 0, 0, False, False, False),
+              Bowler(4, 0, 0, 0, 0, 0, False, False, False), Bowler(5, 0, 0, 0, 0, 0, False, False, False), Bowler(6, 0, 0, 0, 0, 0, False, False, False),
+              Bowler(7, 0, 0, 0, 0, 0, False, False, False), Bowler(8, 0, 0, 0, 0, 0, False, False, False), Bowler(9, 0, 0, 0, 0, 0, False, False, False),
+              Bowler(10, 0, 0, 0, 0, 0, False, False, False), Bowler(11, 0, 0, 0, 0, 0, False, False, False)]
 
 import random 
 toss = random.randint(0,1)
@@ -124,22 +128,21 @@ else:
 #print(winner[0].name) format for winner
 #print(teamwinner.name)
 
-import time
-time.sleep(10)
+
 
 print ("Welcome to {} where tonight {} are set to face off against {} in what promises to be a thrilling clash.".format((HomeTeam.arena), (HomeTeam.name), (AwayTeam.name)))
 print ('')
 
 print ("{} and {} are in the middle for the toss.".format(HomePlayer[0].name, AwayPlayer[0].name))
-time.sleep(1)
+
 print ('The coin is tossed...')
 print ('The call from {} is Tails.'.format(AwayPlayer[0].name))
-time.sleep(1)
+
 if toss == 0:
     print ('And its Heads! {} have won the toss.'.format(teamwinner.name))
 else:
     print ('And its Tails! {} have called correctly and won the toss.'.format(teamwinner.name))
-time.sleep(1)
+
 import random
 decision = random.randint(0,1)
 if decision == 0:
@@ -159,37 +162,27 @@ if decision == 0:
 else:
     print ('{} have decided to have a bowl.'.format(Bowlteam.name))
 print ('')
-time.sleep(1)
+
 print ('The {} openers are making their way out to the middle. Its going to be {} to face the first ball.'.format(Batteam.name, Batter[0].name))
 print("")
-time.sleep(1)
-#Links Batsman to Players
-(BatterList[0].batID) = (Batter[0].name)
-(BatterList[1].batID) = (Batter[1].name)
-(BatterList[2].batID) = (Batter[2].name)
-(BatterList[3].batID) = (Batter[3].name)
-(BatterList[4].batID) = (Batter[4].name)
-(BatterList[5].batID) = (Batter[5].name)
-(BatterList[6].batID) = (Batter[6].name)
-(BatterList[7].batID) = (Batter[7].name)
-(BatterList[8].batID) = (Batter[8].name)
-(BatterList[9].batID) = (Batter[9].name)
-(BatterList[10].batID) = (Batter[10].name)
 
-#Links Bowlers to Players
-(BowlerList[0].bowlID) = (BowlPlayer[0].name)
-(BowlerList[1].bowlID) = (BowlPlayer[1].name)
-(BowlerList[2].bowlID) = (BowlPlayer[2].name)
-(BowlerList[3].bowlID) = (BowlPlayer[3].name)
-(BowlerList[4].bowlID) = (BowlPlayer[4].name)
-(BowlerList[5].bowlID) = (BowlPlayer[5].name)
-(BowlerList[6].bowlID) = (BowlPlayer[6].name)
-(BowlerList[7].bowlID) = (BowlPlayer[7].name)
-(BowlerList[8].bowlID) = (BowlPlayer[8].name)
-(BowlerList[9].bowlID) = (BowlPlayer[9].name)
-(BowlerList[10].bowlID) = (BowlPlayer[10].name)
-
-
+#Links Players to Players
+n=0
+while (n < 11):
+   (BatterList[n].batID) = (Batter[n].name)
+   n = n + 1
+n=0
+while (n < 11):
+   (BowlerList[n].bowlID) = (BowlPlayer[n].name)
+   n = n + 1
+n=0
+while (n < 11):
+   (BatterList[n].batrating) = (Batter[n].batrating)
+   n = n + 1
+n=0
+while (n < 11):
+   (BowlerList[n].bowlrating) = (BowlPlayer[n].bowlrating)
+   n = n + 1
 
 #Start Of Innings Setup
 
@@ -202,10 +195,21 @@ gameover = Decimal(0)
 NonStriker = 0
 CurrentBowler = 0
 LastBowler = 0
+LastOut = 0
 Striker = 0
 wickets = 0
+FOW = 0
 runs = 0
+overruns = 0
+overwickets = 0
 score =+ runs
+Caught = 0
+Bowled = 0
+LBW = 0
+Stumped = 0
+Runout = 0
+ObstructingtheField = 0
+HitWicket = 0
 n = 0
 isout = bool(1)
 isstriker = bool(2)
@@ -213,21 +217,29 @@ isbowler = bool(3)
 lastbowler = bool(4)
 
 #Determining Bowler
-n = 0
-while (n < 11):
-    if (BowlerList[n].lastbowler) == False: 
+n = 10
+while (n >= 0):
+    if (BowlerList[n].lastbowler) == False and (BowlerList[n].bowlrating) >=50: 
         (BowlerList[n].isbowler) = True
         break
-    if (BowlerList[n].lastbowler) == True: 
-        n = n + 1
-n = 0
-while (n < 11):
+    if (BowlerList[n].lastbowler) == True or (BowlerList[n].bowlrating) <=50: 
+        n = n - 1
+n = 10
+while (n >= 0):
     if (BowlerList[n].isbowler) == True:
         CurrentBowler = (BowlerList[n]) 
         break
     if (BowlerList[n].isbowler) == False:
-        n = n + 1
-    
+        n = n - 1
+
+#Determining LAstBowler
+n = 10
+while (n >= 0):
+    if (BowlerList[n].isbowler) == False: 
+        LastBowler = (BowlerList[n])
+        break
+    else:
+        n = n - 1
         
 #Determines who the Striker is
 n = 0
@@ -264,18 +276,30 @@ while (n <11):
         break
     if (BatterList[n].isnonstriker) == False:
         n = n + 1
+
+#Game Conditions
+endinnings = False
+
+    
 #Repeating Overs 1-20
 while (gameover < Decimal("19.1")):
     while (over < Decimal("0.7")):
+        if wickets >= 10:
+            endinnings = True
+            break
         over += Decimal("0.1")
         gameover += Decimal("0.1")
-        
+        if over == Decimal("0.1"):
+            overruns = 0
+            overwickets = 0
         #Ball 
         import random
-        my_list = [0] *301 + [1] *411 + [2] *78 + [3] *6 + [4] *103 + [5] *2 + [6] *42 + [8] *57
-
-        result = random.choice(my_list)
-
+        OutcomeList1 = [0] *301 + [1] *411 + [2] *78 + [3] *6 + [4] *103 + [5] *2 + [6] *42 + [8] *57
+        OutcomeList = [0] *301 + [1] *411 + [2] *78 + [3] *6 + [4] *103 + [5] *2 + [6] *42 + [8] *57
+        DismisalList = ['Caught'] *2996 + ['Bowled'] *990 + ['Runout'] *494 + ['LBW'] *364 + ['Stumped'] *161 + ['HitWicket'] *8 + ['ObstructingtheField'] *1
+        result = random.choice(OutcomeList)
+        if result ==8:
+            dismisal = random.choice(DismisalList)
         (Striker.hasbatted) = True
         (Striker.isstriker) = True
         (NonStriker.hasbatted) = True
@@ -283,36 +307,45 @@ while (gameover < Decimal("19.1")):
         #Result of Ball consequences
         if result != 8:
             runs += result
+            overruns += result
             (Striker.batruns) += int(result)
             (Striker.batballs) += 1
+            (CurrentBowler.bowlruns) += int(result)
+            (CurrentBowler.bowlballs) += Decimal("0.1")
         elif result ==8:
             wickets += 1
+            overwickets += 1
+            (Striker.howout) = dismisal
             (Striker.batballs) += 1
             (Striker.isout) = True
+            LastOut = Striker
+            (CurrentBowler.bowlballs) += Decimal("0.1")
+            (CurrentBowler.bowlwickets) += 1
             
 
             
         if (result == 0):
-            Comm = ("{} - (0) -  {} to {}, no run.")
+            Comm = ("{}  (0)   {} to {}, no run.")
         elif (result == 1):
-            Comm = ("{} - (1) -  {} to {}, 1 run.")
+            Comm = ("{}  (1)   {} to {}, 1 run.")
         elif (result == 2):
-            Comm = ("{} - (2) -  {} to {}, 2 runs.")
+            Comm = ("{}  (2)   {} to {}, 2 runs.")
         elif (result == 3):
-            Comm = ("{} - (3) -  {} to {}, 3 runs.")
+            Comm = ("{}  (3)   {} to {}, 3 runs.")
         elif (result == 4):
-            Comm = ("{} - (4) -  {} to {}, FOUR runs.")
+            Comm = ("{}  (4)   {} to {}, FOUR runs.")
         elif (result == 5):
-            Comm = ("{} - (5) -  {} to {}, 5 runs.")
+            Comm = ("{}  (5)   {} to {}, 5 runs.")
         elif (result == 6):
-            Comm = ("{} - (6) -  {} to {}, SIX runs.")
+            Comm = ("{}  (6)   {} to {}, SIX runs.")
         else:
-            Comm = ("{} - (W) -  {} to {}, OUT.")
+            Comm = ("{}  (W)   {} to {}, OUT.")
 
         
      
         print(Comm.format(gameover, CurrentBowler.bowlID, Striker.batID))
-        
+           # if (Striker.batruns)>= 50: print("And that's his 50! Wonderful Innings!")
+         #TRY TO WORK THIS OUT
 
 
         #Determines who the batsmen are
@@ -337,53 +370,98 @@ while (gameover < Decimal("19.1")):
                     n = n + 1
         if result % 2 == 1:
             Striker, NonStriker = NonStriker, Striker # Rotates Strike
-
+        #End of Over Events
         if over == Decimal("0.6"):
             Striker, NonStriker = NonStriker, Striker # Rotates Strike
             over -= Decimal("0.6")
             gameover += Decimal("0.4")
-            (CurrentBowler.lastbowler) = True
+            if overruns == 0:
+                (CurrentBowler.bowlmaiden) += 1
+            (CurrentBowler.bowlballs) += Decimal("0.4")
             (CurrentBowler.isbowler) = False
-            #Determines who the NonStriker is
-            n = 0
-            while (n < 11):
-                if (BowlerList[n].lastbowler) == True:
-                    LastBowler = (BowlerList[n])
-                    break 
-                if (BowlerList[n].lastbowler) == False:
-                    n = n + 1
-            if  gameover >= Decimal("5.0"):
-                (LastBowler.lastbowler) = False
-            
-                
-            
-            #Determining Bowler
-            n = 0
-            while (n < 11):
-                if (BowlerList[n].lastbowler) == False: 
+            (CurrentBowler.lastbowler) = True
+            (LastBowler.lastbowler) = False
+            if (CurrentBowler.bowlballs) >= Decimal("4.0"):
+                (CurrentBowler.maxed) = True
+        #Determines Next Bowlers
+        if (CurrentBowler.isbowler) == False and (CurrentBowler.lastbowler) == True:
+            CurrentBowler = 0
+            LastBowler = 0
+            n = 10
+            while (n >=0):
+                if (BowlerList[n].lastbowler) == False and (BowlerList[n].maxed) == False and (BowlerList[n].bowlrating) >=50: 
                     (BowlerList[n].isbowler) = True
                     break
-                if (BowlerList[n].lastbowler) == True: 
-                    n = n + 1
-            n = 0
-            while (n < 11):
-                if (BowlerList[n].isbowler) == True:
+                if (BowlerList[n].lastbowler) == True or (BowlerList[n].maxed) == True or (BowlerList[n].bowlrating) <=50:  
+                    n = n - 1
+        if CurrentBowler == 0:
+            n = 10
+            while (n >=0):
+                if (BowlerList[n].isbowler) == True and (BowlerList[n].lastbowler) == False:
                     CurrentBowler = (BowlerList[n]) 
                     break
-                if (BowlerList[n].isbowler) == False:
-                    n = n + 1
+                else:
+                    n = n - 1
+        if LastBowler == 0:
+            n = 10
+            while (n >=0):
+                if (BowlerList[n].isbowler) == False and (BowlerList[n].lastbowler) == True:
+                    LastBowler = (BowlerList[n])
+                    break
+                else:
+                    n = n - 1
+            
             break
-    
-    print("")
-    print("END OF OVER: {} | {} Runs {} Wkt | {}: {}/{}".format(gameover, runs, wickets, Batteam.name, runs, wickets))
-    print("{}                          {}({})".format(Striker.batID, Striker.batruns, Striker.batballs))
-    print("{}                          {}({})".format(NonStriker.batID, NonStriker.batruns, NonStriker.batballs))
-    print("")
-    time.sleep(1)
-    if over >= Decimal("20.0"):
+    if endinnings == True:
+        print("")
+        print("END OF INNINGS | {}: {}/{} from {} Overs".format(Batteam.name, runs, wickets, gameover))
+        print("")
+        break
+    if gameover >= Decimal("1.0"):
+        print("")
+        print("END OF OVER: {:2.0f} | {} Runs {} Wkt | {}: {}/{}".format(gameover, overruns, overwickets, Batteam.name, runs, wickets))
+        print("{:20s}{:2.0f}({:2.0f}) | {:20s}{:1.0f}-{:1.0f}-{:2.0f}-{:1.0f}".format(Striker.batID, Striker.batruns, Striker.batballs, CurrentBowler.bowlID, CurrentBowler.bowlballs, CurrentBowler.bowlmaiden, CurrentBowler.bowlruns, CurrentBowler.bowlwickets))
+        print("{:20s}{:2.0f}({:2.0f}) | {:20s}{:1.0f}-{:1.0f}-{:2.0f}-{:1.0f}".format(NonStriker.batID, NonStriker.batruns, NonStriker.batballs, LastBowler.bowlID, LastBowler.bowlballs, LastBowler.bowlmaiden, LastBowler.bowlruns, LastBowler.bowlwickets))
+        if overwickets >= 0 and wickets >= 1:
+            print("Last Wicket: {}  {}({}) - {}".format(LastOut.batID, LastOut.batruns, LastOut.batballs, LastOut.howout))
+        print("")
+    if gameover == Decimal("20.0"):
+        print("")
+        print("END OF INNINGS | {}: {}/{} from {} Overs".format(Batteam.name, runs, wickets, gameover))
+        print("")
         break
  
+print("{} Innings (20 overs maximum)".format(Batteam.name))
+print ("-" *60)
+print("{:<30}{:>5}{:>5}{:>5}{:>5}{:>9} |".format("BATSMAN", "R", "B", "4s", "6s", "SR"))
+n = 0
+while (n<11):
+    if (BatterList[n].hasbatted) == True:
+        print("{:<30}{:5.0f}{:5.0f}{:5.0f}{:5.0f}{:9.2f} |".format(BatterList[n].batID,BatterList[n].batruns,BatterList[n].batballs, 0, 0, (BatterList[n].batruns/BatterList[n].batballs)*100))
+        n = n + 1
+        if n == 10:
+            break
+    if (BatterList[n].hasbatted) == False:
+        print("{:<59} |".format(BatterList[n].batID))
+        n = n + 1
+        if n == 10:
+            break
+print("TOTAL            {}/{} ({} Overs, RR: {:2.2f})".format(runs, wickets, gameover, (runs/gameover)))
+
+print("")
+
+print("{:<30}{:>5}{:>5}{:>5}{:>5}{:>9} |".format("BOWLING", "O", "M", "R", "W", "ECO"))
+n = 10
+while (n>=0):
+    if (BowlerList[n].bowlballs) >= Decimal("0.1"):
+        print("{:<30}{:5.0f}{:5.0f}{:5.0f}{:5.0f}{:9.2f} |".format(BowlerList[n].bowlID,BowlerList[n].bowlballs ,BowlerList[n].bowlmaiden, BowlerList[n].bowlruns, BowlerList[n].bowlwickets, (BowlerList[n].bowlruns/BowlerList[n].bowlballs)))
+        n = n - 1
+        if n == 0:
+            break
+    if (BowlerList[n].bowlballs) <= Decimal("0.0"):
+        break
+print("-" *60)
+print("-" *60)
 
 
-    
  
